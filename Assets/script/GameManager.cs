@@ -10,10 +10,8 @@ public class GameManager : MonoBehaviour
 
     float nextDowntimer;
     float nextLeftRighttimer;
-    float nextRotateimer;
     [SerializeField]float nextDownInterval;
     [SerializeField]float nextLeftRightInterval;
-    [SerializeField]float nextRotateInterval;
     void Start()
     {
         spawrn = GameObject.FindObjectOfType<Spawrn>();
@@ -54,6 +52,14 @@ public class GameManager : MonoBehaviour
             if (!activeblock.CheckBlock(activeblock))
             {
                 activeblock.MoveRight();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            activeblock.RotateLeft();
+            if (!activeblock.CheckBlock(activeblock))
+            {
+                activeblock.RotateRight();
             }
         }
     }

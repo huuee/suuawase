@@ -482,8 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeblock: {fileID: 0}
   nextDownInterval: 0
-  nextLeftRightInterval: 1
-  nextRotateInterval: 0
+  nextLeftRightInterval: 0.2
 --- !u!4 &1244061582
 Transform:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     Board board;
-    private void Start()
+    private void Awake()
     {
         board = GameObject.FindObjectOfType<Board>();
     }
@@ -28,7 +28,7 @@ public class Block : MonoBehaviour
     }
     void idou(int x,int y)
     {
-        transform.Translate(x, y, 0);
+        transform.position += new Vector3(x, y);
     }
 
     public void RotateRight()
