@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public Block activeblock;
     Spawrn spawrn;
+    float timer = 0;
 
     void Start()
     {
@@ -13,9 +14,13 @@ public class GameManager : MonoBehaviour
         spawrn.callspawrn();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        if(timer>0.5f)
+        {
+            activeblock.MoveDown();
+            timer = 0;
+        }
     }
 }

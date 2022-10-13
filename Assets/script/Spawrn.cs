@@ -7,7 +7,7 @@ public class Spawrn : MonoBehaviour
     [SerializeField] GameObject[] blocks;
     Board board;
     GameManager gmana;
-    private void Start()
+    private void Awake()
     {
         board = GameObject.FindObjectOfType<Board>();
         gmana = GameObject.FindObjectOfType<GameManager>();
@@ -24,6 +24,7 @@ public class Spawrn : MonoBehaviour
     {
         float pos_x = board.width / 2;
         float pos_y = board.height - board.hearder;
-        Instantiate(blocks[i], new Vector2(pos_x, pos_y), Quaternion.identity);
+        GameObject block=Instantiate(blocks[i], new Vector2(pos_x, pos_y), Quaternion.identity);
+        gmana.activeblock = block.GetComponent<Block>();
     }
 }
