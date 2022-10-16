@@ -8,7 +8,7 @@ public class Board : MonoBehaviour
     GameObject empty;
 
     public bool[,] grid;
-
+    SpriteRenderer spren;
     public int width = 10, height = 30, hearder = 8;
     private void Awake()
     {
@@ -22,6 +22,8 @@ public class Board : MonoBehaviour
             {
                 //グリッド(マス目)の生成
                 GameObject gri=Instantiate(empty, new Vector3(x, y), Quaternion.identity);
+                spren = gri.GetComponent<SpriteRenderer>();
+                //spren.sortingOrder 
                 gri.transform.parent = this.transform;
                 //マス目のデータの初期化
                 grid[x, y] = false;
