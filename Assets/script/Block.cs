@@ -7,11 +7,13 @@ public class Block : MonoBehaviour
     int cou = 0;    //消えたの量
     Board board;
     Spawrn spawrn;
+    GameManager gmana;
     [SerializeField]bool canRotate=true;
     private void Awake()
     {
         board = GameObject.FindObjectOfType<Board>();
         spawrn = GameObject.FindObjectOfType<Spawrn>();
+        gmana = GameObject.FindObjectOfType<GameManager>();
     }
     public void MoveUp()
     {
@@ -109,6 +111,13 @@ public class Block : MonoBehaviour
             }
             flag = true;
         }
+        if (cou == 1) gmana.score += 100;
+        if (cou == 2) gmana.score += 300;
+        if (cou == 3) gmana.score += 500;
+        if (cou >= 4) gmana.score += 800;
+        if (cou >= 1 && cou <= 3) gmana.se(gmana.ontwothreeline);
+        else if (cou == 4) gmana.se(gmana.fourline);
+        cou = 0;
     }
     //そろった列を消す
     void DestroyBlock(int y)
@@ -135,6 +144,8 @@ public class Block : MonoBehaviour
     {
         GameObject block;
         GameObject chiblock;
+        Vector3 down = new Vector3(0, -1, 0);
+        Vector3 up = new Vector3(0, 1, 0);
         for (int y = yy; y < board.height - board.hearder; y++)
         {
             for (int x = 0; x < board.width; x++)
@@ -149,7 +160,12 @@ public class Block : MonoBehaviour
             for (int j = 0; j < block.transform.childCount; j++)
             {
                 chiblock = block.transform.GetChild(j).gameObject;
-                if (chiblock.transform.position.y > yy) chiblock.transform.position += new Vector3(0, -1, 0);
+                if (chiblock.transform.position.y > yy) chiblock.transform.position += down;
+                if (block.GetComponent<Block>() == gmana.holdblock) //ホールドしてるブロックも対象になるので
+                {                                                   //下がった分を上にあげる処理をする
+                    chiblock.transform.position += up;
+                    break;
+                }
             }
         }
 
